@@ -8,8 +8,21 @@
 # Please see the COPYING file for details.
 #
 
+#:nodoc:
 module Sinatra
+  #:nodoc:
   module FormHelper
+    ##
+    # Input field builder
+    #
+    # Useage:
+    #
+    #    input_field :my_field, :type => 'text'
+    #
+    # @param [Mixed] name The name of the field
+    # @param [Hash] options The fields options
+    # @author Jack Polgar
+    #
     def input_field(name, options = {})
       if name.class == Array
         name = "#{name[0]}[#{name[1]}]"
@@ -28,38 +41,89 @@ module Sinatra
       "<input #{html_options.join(' ')}>"
     end
     
+    ##
+    # Text field builder
+    #
+    # Useage:
+    #    text_field :my_field, :class => 'text', :value => 'my value'
+    #
+    # @param [Mixed] name The name of the field
+    # @param [Hash] options The fields options
+    # @author Jack Polgar
+    #
     def text_field(name, options = {})
       input_field name, options.merge({:type => 'text'})
     end
     
+    ##
+    # Password field builder
+    #
+    # Useage:
+    #    pasword_field :my_field, :class => 'text', :value => 'my value'
+    #
+    # @param [Mixed] name The name of the field
+    # @param [Hash] options The fields options
+    # @author Jack Polgar
+    #
     def password_field(name, options = {})
       input_field name, options.merge({:type => 'password'})
     end
     
+    ##
+    # Email field builder
+    #
+    # Useage:
+    #    email_field :my_field, :class => 'text', :value => 'my value'
+    #
+    # @param [Mixed] name The name of the field
+    # @param [Hash] options The fields options
+    # @author Jack Polgar
+    #
     def email_field(name, options = {})
       input_field name, options.merge({:type => 'email'})
     end
     
-    def select_box(name, options, selected = nil)
+    ##
+    # Select box builder
+    #
+    # Useage:
+    #    select_box :my_field, [['Hello', 1], ['World', 2]], 2 
+    #
+    # @param [Mixed] name The name of the field
+    # @param [Array] rows Array of the select field options
+    # @param [Mixed] selected Value of the selected option
+    # @author Jack Polgar
+    #
+    def select_box(name, rows, selected = nil)
       if name.class == Array
         name = "#{name[0]}[#{name[1]}]"
       end
       
       html = ["<select name=\"#{name.to_s}\" id=\"#{name.to_s}\">"]
       
-      options.each do |option|
-        if option[1] == selected
+      rows.each do |row|
+        if row[1] == selected
           selected_html = ' selected'
         else
           selected_html = ''
         end
-        html.push "  <option value=\"#{option[1]}\" #{selected_html}>#{option[0]}</option>"
+        html.push "  <option value=\"#{row[1]}\" #{selected_html}>#{row[0]}</option>"
       end
       
       html.push "</select>\n"
       return html.join("\n")
     end
     
+    ##
+    # Text area builder
+    #
+    # Useage:
+    #    textarea :my_field, :class => 'text', :value => 'my value'
+    #
+    # @param [Mixed] name The name of the field
+    # @param [Hash] options The fields options
+    # @author Jack Polgar
+    #
     def textarea(name, options = {})
       if name.class == Array
         name = "#{name[0]}[#{name[1]}]"

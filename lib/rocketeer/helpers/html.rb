@@ -25,6 +25,7 @@ module Sinatra
       
       html_options = []
       options.each do |k, v|
+        pass if v === nil
         html_options.push "#{k.to_s}=\"#{v.to_s}\""
       end
       
@@ -36,6 +37,14 @@ module Sinatra
         text
       else
         link_to text, the_url, options
+      end
+    end
+    
+    def link_to_if(condition, text, the_url, options = {})
+      if condition
+        link_to text, the_url, options = {}
+      else
+        text
       end
     end
     
