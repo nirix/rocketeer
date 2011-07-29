@@ -73,7 +73,7 @@ module Sinatra
     #
     # Useage:
     #
-    #    link_to 'Google', 'http://google.com.au'
+    #    link_to_if Time.now.year == 2011, 'Google', 'http://google.com.au'
     #
     # @param [Boolean] condition The condition to check
     # @param [String] text The text for the link
@@ -96,7 +96,7 @@ module Sinatra
     # Useage:
     #
     #    css_inc_tag '/assets/css/master.css'
-    #    css_inc_tag '/assets/css/print', 'screen'
+    #    css_inc_tag '/assets/css/print.css', 'screen'
     #
     # @param [String] url The URL of the stylesheet
     # @param [String] media The media of the stylesheet
