@@ -13,3 +13,10 @@ require 'sinatra/base'
 require 'rocketeer/helpers/html'
 require 'rocketeer/helpers/form'
 require 'rocketeer/helpers/text'
+
+# @private
+module Sinatra
+  helpers Rocketeer::Helpers::HTML
+  helpers Rocketeer::Helpers::Form
+  helpers Rocketeer::Helpers::Text
+end
