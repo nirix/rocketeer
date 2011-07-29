@@ -19,9 +19,10 @@ module Sinatra
     #
     #    input_field :my_field, :type => 'text'
     #
-    # @param [Mixed] name The name of the field
-    # @param [Hash] options The fields options
+    # @param [Mixed] name    The name of the field
+    # @param [Hash]  options The fields options
     # @author Jack Polgar
+    # @since 0.1
     #
     def input_field(name, options = {})
       if name.class == Array
@@ -47,9 +48,10 @@ module Sinatra
     # Useage:
     #    text_field :my_field, :class => 'text', :value => 'my value'
     #
-    # @param [Mixed] name The name of the field
-    # @param [Hash] options The fields options
+    # @param [Mixed] name    The name of the field
+    # @param [Hash]  options The fields options
     # @author Jack Polgar
+    # @since 0.1
     #
     def text_field(name, options = {})
       input_field name, options.merge({:type => 'text'})
@@ -61,9 +63,10 @@ module Sinatra
     # Useage:
     #    pasword_field :my_field, :class => 'text', :value => 'my value'
     #
-    # @param [Mixed] name The name of the field
-    # @param [Hash] options The fields options
+    # @param [Mixed] name    The name of the field
+    # @param [Hash]  options The fields options
     # @author Jack Polgar
+    # @since 0.1
     #
     def password_field(name, options = {})
       input_field name, options.merge({:type => 'password'})
@@ -75,9 +78,10 @@ module Sinatra
     # Useage:
     #    email_field :my_field, :class => 'text', :value => 'my value'
     #
-    # @param [Mixed] name The name of the field
-    # @param [Hash] options The fields options
+    # @param [Mixed] name    The name of the field
+    # @param [Hash]  options The fields options
     # @author Jack Polgar
+    # @since 0.1
     #
     def email_field(name, options = {})
       input_field name, options.merge({:type => 'email'})
@@ -89,10 +93,11 @@ module Sinatra
     # Useage:
     #    select_box :my_field, [['Hello', 1], ['World', 2]], 2 
     #
-    # @param [Mixed] name The name of the field
-    # @param [Array] rows Array of the select field options
+    # @param [Mixed] name     The name of the field
+    # @param [Array] rows     Array of the select field options
     # @param [Mixed] selected Value of the selected option
     # @author Jack Polgar
+    # @since 0.1
     #
     def select_box(name, rows, selected = nil)
       if name.class == Array
@@ -120,9 +125,10 @@ module Sinatra
     # Useage:
     #    textarea :my_field, :class => 'text', :value => 'my value'
     #
-    # @param [Mixed] name The name of the field
-    # @param [Hash] options The fields options
+    # @param [Mixed] name    The name of the field
+    # @param [Hash]  options The fields options
     # @author Jack Polgar
+    # @since 0.1
     #
     def textarea(name, options = {})
       if name.class == Array
