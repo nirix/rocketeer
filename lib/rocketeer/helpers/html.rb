@@ -102,7 +102,7 @@ module Rocketeer
       # @author Jack Polgar
       # @since 0.1
       #
-      def css_inc_tag(url, media = "screen")
+      def css_link_tag(url, media = "screen")
         "<link rel=\"stylesheet\" href=\"#{url}?#{Time.now.to_i}\" media=\"#{media}\" />"
       end
       
