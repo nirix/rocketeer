@@ -12,10 +12,28 @@ module Rocketeer
   module Helpers
     module Form
       ##
+      # Label tag builder
+      #
+      # @author: Jack Polgar
+      # @since 0.5
+      #
+      # @example:
+      #   label 'Username', :for => :username
+      #
+      # @param [String] Text for thelabel
+      # @param [Hash]   Options
+      #
+      # @return [String]
+      #
+      def label(text, options = {})
+        options[:for] = _name(options[:for]) if options[:for]
+        "<label#{HTML.attributes(options)}>#{text}</label>"
+      end
+
+      ##
       # Input field builder
       #
-      # Useage:
-      #
+      # @example:
       #    input_field :my_field, :type => 'text'
       #
       # @param [Mixed] name    The name of the field
@@ -24,27 +42,18 @@ module Rocketeer
       # @since 0.1
       #
       def input_field(name, options = {})
-        if name.class == Array
-          name = "#{name[0]}[#{name[1]}]"
-        end
-        defaults = {
-          :id => name.to_s,
-          :name => name.to_s
-        }
+        options = {
+          :id => _name(name).to_s,
+          :name => _name(name).to_s
+        }.merge(options)
         
-        html_options = []
-        options = defaults.merge(options)
-        options.each do |k, v|
-          html_options.push "#{k}=\"#{v}\""
-        end
-        
-        "<input #{html_options.join(' ')}>"
+        "<input#{HTML.attributes(options)}>"
       end
       
       ##
       # Text field builder
       #
-      # Useage:
+      # @example:
       #    text_field :my_field, :class => 'text', :value => 'my value'
       #
       # @param [Mixed] name    The name of the field
@@ -59,7 +68,7 @@ module Rocketeer
       ##
       # Password field builder
       #
-      # Useage:
+      # @example:
       #    pasword_field :my_field, :class => 'text', :value => 'my value'
       #
       # @param [Mixed] name    The name of the field
@@ -74,7 +83,7 @@ module Rocketeer
       ##
       # Email field builder
       #
-      # Useage:
+      # @example:
       #    email_field :my_field, :class => 'text', :value => 'my value'
       #
       # @param [Mixed] name    The name of the field
@@ -89,7 +98,7 @@ module Rocketeer
       ##
       # Select box builder
       #
-      # Useage:
+      # @example:
       #    select_box :my_field, [['Hello', 1], ['World', 2]], 2 
       #
       # @param [Mixed] name     The name of the field
@@ -99,10 +108,7 @@ module Rocketeer
       # @since 0.1
       #
       def select_box(name, rows, selected = nil)
-        if name.class == Array
-          name = "#{name[0]}[#{name[1]}]"
-        end
-        
+        name = _name(name)
         html = ["<select name=\"#{name.to_s}\" id=\"#{name.to_s}\">"]
         
         rows.each do |row|
@@ -111,7 +117,7 @@ module Rocketeer
           else
             selected_html = ''
           end
-          html.push "  <option value=\"#{row[1]}\" #{selected_html}>#{row[0]}</option>"
+          html.push "  <option value=\"#{row[1]}\"#{selected_html}>#{row[0]}</option>"
         end
         
         html.push "</select>\n"
@@ -121,7 +127,7 @@ module Rocketeer
       ##
       # Text area builder
       #
-      # Useage:
+      # @example:
       #    textarea :my_field, :class => 'text', :value => 'my value'
       #
       # @param [Mixed] name    The name of the field
@@ -130,13 +136,11 @@ module Rocketeer
       # @since 0.1
       #
       def textarea(name, options = {})
-        if name.class == Array
-          name = "#{name[0]}[#{name[1]}]"
-        end
-        defaults = {
+        options = {
           :id => name.to_s,
-          :name => name.to_s
-        }
+          :name => _name(name).to_s
+        }.merge(options)
+
         if options[:value]
           value = options[:value]
           options[:value] = nil
@@ -144,15 +148,32 @@ module Rocketeer
           value = ''
         end
         
-        html_options = []
-        options = defaults.merge(options)
-        options.each do |k, v|
-          next if v == nil
-          html_options.push "#{k}=\"#{v}\""
-        end
-        
-        "<textarea #{html_options.join(' ')}>#{value}</textarea>"
+        "<textarea#{HTML.attributes(options)}>#{value}</textarea>"
       end
+
+      ##
+      # Creates a submit button (using <button>)
+      #
+      # @author Jack Polgar
+      # @since 0.5
+      #
+      # @param [String] text
+      # @param [Hash]   options HTML attributes
+      #
+      # @return [String]
+      #
+      def submit_button(text, options = {})
+        "<button type=\"submit\"#{HTML.attributes(options)}>#{text}</button>"
+      end
+
+      private
+        def _name(name)
+          if name.class == Array
+            name = "#{name[0]}[#{name[1]}]"
+          else
+            name
+          end
+        end
     end
   end
 end

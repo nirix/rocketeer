@@ -14,9 +14,8 @@ module Rocketeer
       ##
       # Creates a link to the specified URL with the specified text
       #
-      # Useage:
-      #
-      #    link_to 'Google', 'http://google.com.au'
+      # @example:
+      #    link_to 'Apple', 'http://apple.com/au'
       #
       # @param [String] text The text for the link
       # @param [String] the_url The URL to link to
@@ -49,8 +48,7 @@ module Rocketeer
       ##
       # Creates a link to the specified URL unless the request matches the URL.
       #
-      # Useage:
-      #
+      # @example:
       #    link_to_unless_current 'Google', 'http://google.com.au'
       #
       # @param [String] text The text for the link
@@ -70,8 +68,7 @@ module Rocketeer
       ##
       # Creates a link to the specified URL if the condition is met.
       #
-      # Useage:
-      #
+      # @example:
       #    link_to_if Time.now.year == 2011, 'Google', 'http://google.com.au'
       #
       # @param [Boolean] condition The condition to check
@@ -92,8 +89,7 @@ module Rocketeer
       ##
       # Returns the code for linking CSS style sheets.
       #
-      # Useage:
-      #
+      # @example:
       #    css_inc_tag '/assets/css/master.css'
       #    css_inc_tag '/assets/css/print.css', 'screen'
       #
@@ -109,8 +105,7 @@ module Rocketeer
       ##
       # Returns the code for linking javascript files.
       #
-      # Useage:
-      #
+      # @example:
       #    js_inc_tag '/assets/js/app.js'
       #
       # @param [String] url The URL of the file
@@ -119,6 +114,29 @@ module Rocketeer
       #
       def js_inc_tag(url)
         "<script src=\"#{url}\" type=\"text/javascript\"></script>"
+      end
+
+      ##
+      # Builds HTML attributes
+      #
+      # @author Jack Polgar
+      # @since 0.5
+      #
+      # @param [Hash] attributes
+      #
+      # @return [String]
+      #
+      def self.attributes(attributes)
+        html = []
+        attributes.each do |k, v|
+          next if v == nil
+          html.push "#{k}=\"#{v}\""
+        end
+        if attributes.count > 0
+          " #{html.join(' ')}"
+        else
+          ''
+        end
       end
     end
   end

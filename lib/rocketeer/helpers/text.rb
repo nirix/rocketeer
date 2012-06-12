@@ -14,8 +14,7 @@ module Rocketeer
       ##
       # Pluralizes the string.
       #
-      # Useage:
-      #
+      # @example:
       #    pluralize comments.count, 'comment'
       #
       # @param [Integer] count The count
@@ -31,8 +30,7 @@ module Rocketeer
       ##
       # Shortens the string to the specified length
       #
-      # Useage:
-      #
+      # @example:
       #    shorten_string 'A very, very, long string', 5
       #
       # @param [String] text The string to shorten
