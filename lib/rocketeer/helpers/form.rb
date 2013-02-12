@@ -1,6 +1,6 @@
 #
 # Rocketeer
-# Copyright (C) 2011-2012 Jack Polgar
+# Copyright (C) 2011-2013 Jack Polgar
 # All Rights Reserved
 # http://github.com/nirix/rocketeer
 #
@@ -55,10 +55,10 @@ module Rocketeer
           :id => _name(name).to_s,
           :name => _name(name).to_s
         }.merge(options)
-        
+
         "<input#{HTML.attributes(options)}>"
       end
-      
+
       ##
       # Text field builder
       #
@@ -73,7 +73,7 @@ module Rocketeer
       def text_field(name, options = {})
         input_field name, options.merge({:type => 'text'})
       end
-      
+
       ##
       # Password field builder
       #
@@ -88,7 +88,7 @@ module Rocketeer
       def password_field(name, options = {})
         input_field name, options.merge({:type => 'password'})
       end
-      
+
       ##
       # Email field builder
       #
@@ -103,12 +103,12 @@ module Rocketeer
       def email_field(name, options = {})
         input_field name, options.merge({:type => 'email'})
       end
-      
+
       ##
       # Select box builder
       #
       # @example:
-      #    select_box :my_field, [['Hello', 1], ['World', 2]], 2 
+      #    select_box :my_field, [['Hello', 1], ['World', 2]], 2
       #
       # @param [Mixed] name     The name of the field
       # @param [Array] rows     Array of the select field options
@@ -119,7 +119,7 @@ module Rocketeer
       def select_box(name, rows, selected = nil)
         name = _name(name)
         html = ["<select name=\"#{name.to_s}\" id=\"#{name.to_s}\">"]
-        
+
         rows.each do |row|
           if row[1] == selected
             selected_html = ' selected'
@@ -128,11 +128,11 @@ module Rocketeer
           end
           html.push "  <option value=\"#{row[1]}\"#{selected_html}>#{row[0]}</option>"
         end
-        
+
         html.push "</select>\n"
         return html.join("\n")
       end
-      
+
       ##
       # Text area builder
       #
@@ -146,7 +146,7 @@ module Rocketeer
       #
       def textarea(name, options = {})
         options = {
-          :id => name.to_s,
+          :id => _name(name).to_s,
           :name => _name(name).to_s
         }.merge(options)
 
@@ -156,7 +156,7 @@ module Rocketeer
         else
           value = ''
         end
-        
+
         "<textarea#{HTML.attributes(options)}>#{value}</textarea>"
       end
 
