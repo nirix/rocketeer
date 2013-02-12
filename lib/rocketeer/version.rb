@@ -1,6 +1,6 @@
 #
 # Rocketeer
-# Copyright (C) 2011-2012 Jack Polgar
+# Copyright (C) 2011-2013 Jack Polgar
 # All Rights Reserved
 # http://github.com/nirix/rocketeer
 #
@@ -18,5 +18,5 @@
 #
 
 module Rocketeer
-  VERSION = "0.5.0"
+  VERSION = "0.5.1"
 end
