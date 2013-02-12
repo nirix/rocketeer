@@ -35,7 +35,7 @@ module Rocketeer
       # @return [String]
       #
       def label(text, options = {})
-        options[:for] = _name(options[:for]) if options[:for]
+        options[:for] = _id(options[:for]) if options[:for]
         "<label#{HTML.attributes(options)}>#{text}</label>"
       end
 
@@ -52,9 +52,16 @@ module Rocketeer
       #
       def input_field(name, options = {})
         options = {
-          :id => _name(name).to_s,
           :name => _name(name).to_s
         }.merge(options)
+
+        # If the ID is not set, use the field name
+        if !options.key? :id
+          options[:id] = _id(name).to_s
+        end
+
+        # Remove the ID if it's false
+        options.delete(:id) if options[:id] === false
 
         "<input#{HTML.attributes(options)}>"
       end
@@ -118,7 +125,7 @@ module Rocketeer
       #
       def select_box(name, rows, selected = nil)
         name = _name(name)
-        html = ["<select name=\"#{name.to_s}\" id=\"#{name.to_s}\">"]
+        html = ["<select name=\"#{name.to_s}\" id=\"#{_id(name).to_s}\">"]
 
         rows.each do |row|
           if row[1] == selected
@@ -146,7 +153,7 @@ module Rocketeer
       #
       def textarea(name, options = {})
         options = {
-          :id => _name(name).to_s,
+          :id => _id(name).to_s,
           :name => _name(name).to_s
         }.merge(options)
 
@@ -177,11 +184,19 @@ module Rocketeer
 
       private
         def _name(name)
-          if name.class == Array
-            name = "#{name[0]}[#{name[1]}]"
-          else
-            name
+          if name.is_a?(Array)
+            return name = "#{name[0]}[#{name[1]}]"
           end
+
+          name
+        end
+
+        def _id(name)
+          if name.is_a?(Array)
+            return "#{name[0]}_#{name[1]}"
+          end
+
+          name
         end
     end
   end
