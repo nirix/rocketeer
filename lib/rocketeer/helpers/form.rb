@@ -141,6 +141,34 @@ module Rocketeer
       end
 
       ##
+      # Checkbox
+      #
+      # @param [Mixed] name
+      # @param [Hash]  options
+      #
+      # @return [String]
+      #
+      # @since 0.6
+      #
+      def checkbox(name, options = {})
+        input_field name, options.merge({ :type => 'checkbox' })
+      end
+
+      ##
+      # Radio button
+      #
+      # @param [Mixed] name
+      # @param [Hash]  options
+      #
+      # @return [String]
+      #
+      # @since 0.6
+      #
+      def radio_button(name, options = {})
+        input_field name, options.merge({ :type => 'radio', :id => false })
+      end
+
+      ##
       # Text area builder
       #
       # @example:
