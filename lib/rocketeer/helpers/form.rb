@@ -151,6 +151,9 @@ module Rocketeer
       # @since 0.6
       #
       def checkbox(name, options = {})
+        if options.key?(:checked)
+          options.delete(:checked) if !options[:checked]
+        end
         input_field name, options.merge({ :type => 'checkbox' })
       end
 
