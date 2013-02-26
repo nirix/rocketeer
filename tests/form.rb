@@ -77,31 +77,31 @@ describe 'Form Helpers' do
   end
 
   # Label
-  it "label 'Username', for: [:user, :username], class: 'control-label'" do
+  it "label" do
     get '/form/label'
     last_response.body.should.equal '<label for="user_username" class="control-label">Username</label>'
   end
 
   # Text field
-  it "text_field [:user, :username], class: 'error', value: 'Rocketeer'" do
+  it "text_field" do
     get '/form/text_field'
     last_response.body.should.equal '<input name="user[username]" class="error" value="Rocketeer" type="text" id="user_username">'
   end
 
   # Password field
-  it "password_field [:user, :password], class: 'error'" do
+  it "password_field" do
     get '/form/password_field'
     last_response.body.should.equal '<input name="user[password]" class="error" type="password" id="user_password">'
   end
 
   # Email field
-  it "email_field [:user, :email], class: 'error', value: 'user@example.com'" do
+  it "email_field" do
     get '/form/email_field'
     last_response.body.should.equal '<input name="user[email]" class="error" value="user@example.com" type="email" id="user_email">'
   end
 
   # Select box
-  it "select_box [:user, :group], [['Admin', 1], ['Registered', 2]], 2" do
+  it "select_box" do
     get '/form/select_box' do
       last_response.body.should.equal '<select name="user[group]" id="user_group">' + "\n" \
                                       '  <option value="1">Admin</option>' + "\n" \
@@ -111,25 +111,25 @@ describe 'Form Helpers' do
   end
 
   # Checkbox
-  it "checkbox [:user, :is_admin], value: 1, checked: true" do
+  it "checkbox" do
     get '/form/checkbox'
     last_response.body.should.equal '<input name="user[is_admin]" value="1" checked type="checkbox" id="user_is_admin">'
   end
 
   # Radio button
-  it "radio_button [:issue, :status], value: 1, checked: true" do
+  it "radio_button" do
     get '/form/radio_button'
     last_response.body.should.equal '<input name="issue[status]" value="1" checked type="radio">'
   end
 
   # Textarea
-  it "textarea [:issue, :info], value: 'Something', class: 'error'" do
+  it "textarea" do
     get '/form/textarea'
     last_response.body.should.equal '<textarea id="issue_info" name="issue[info]" class="error">Something</textarea>'
   end
 
   # Submit button
-  it "submit_button 'Save', class: 'btn btn-primary'" do
+  it "submit_button" do
     get '/form/submit_button'
     last_response.body.should.equal '<button type="submit" class="btn btn-primary">Save</button>'
   end
