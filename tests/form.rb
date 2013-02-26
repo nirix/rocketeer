@@ -79,7 +79,7 @@ describe 'Form Helpers' do
   # Select box
   it "select_box [:user, :group], [['Admin', 1], ['Registered', 2]], 2" do
     get '/form/select_box' do
-      last_response.body.should.equal '<select name="user[group]" id="user[group]">' + "\n" \
+      last_response.body.should.equal '<select name="user[group]" id="user_group">' + "\n" \
                                       '  <option value="1">Admin</option>' + "\n" \
                                       '  <option value="2" selected>Registered</option>' + "\n" \
                                       '</select>' + "\n"
