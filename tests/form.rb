@@ -55,6 +55,12 @@ get '/form/radio_button' do
 end
 
 #########################################
+# Textarea
+get '/form/textarea' do
+  textarea [:issue, :info], value: 'Something', class: 'error'
+end
+
+#########################################
 # Tests
 
 describe 'Form Helpers' do
@@ -108,5 +114,11 @@ describe 'Form Helpers' do
   it "radio_button [:issue, :status], value: 1, checked: true" do
     get '/form/radio_button'
     last_response.body.should.equal '<input name="issue[status]" value="1" checked type="radio">'
+  end
+
+  # Textarea
+  it "textarea [:issue, :info], value: 'Something', class: 'error'" do
+    get '/form/textarea'
+    last_response.body.should.equal '<textarea id="issue_info" name="issue[info]" class="error">Something</textarea>'
   end
 end
