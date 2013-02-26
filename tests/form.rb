@@ -49,6 +49,12 @@ get '/form/checkbox' do
 end
 
 #########################################
+# Radio button
+get '/form/radio_button' do
+  radio_button [:issue, :status], value: 1, checked: true
+end
+
+#########################################
 # Tests
 
 describe 'Form Helpers' do
@@ -96,5 +102,11 @@ describe 'Form Helpers' do
   it "checkbox [:user, :is_admin], value: 1, checked: true" do
     get '/form/checkbox'
     last_response.body.should.equal '<input name="user[is_admin]" value="1" checked type="checkbox" id="user_is_admin">'
+  end
+
+  # Radio button
+  it "radio_button [:issue, :status], value: 1, checked: true" do
+    get '/form/radio_button'
+    last_response.body.should.equal '<input name="issue[status]" value="1" checked type="radio">'
   end
 end
