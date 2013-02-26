@@ -44,16 +44,16 @@ module Rocketeer
           options[:"data-remote"] = options[:remote]
           options[:remote] = nil
         end
-        
+
         html_options = []
         options.each do |k, v|
           pass if v === nil
           html_options.push "#{k.to_s}=\"#{v.to_s}\""
         end
-        
+
         "<a #{html_options.join(' ')}>#{text}</a>"
       end
-      
+
       ##
       # Creates a link to the specified URL unless the request matches the URL.
       #
@@ -73,7 +73,7 @@ module Rocketeer
           link_to text, url, options
         end
       end
-      
+
       ##
       # Creates a link to the specified URL if the condition is met.
       #
@@ -94,7 +94,7 @@ module Rocketeer
           text
         end
       end
-      
+
       ##
       # Returns the code for linking CSS style sheets.
       #
@@ -110,7 +110,7 @@ module Rocketeer
       def css_link_tag(url, media = "screen")
         "<link rel=\"stylesheet\" href=\"#{url}?#{Time.now.to_i}\" media=\"#{media}\" />"
       end
-      
+
       ##
       # Returns the code for linking javascript files.
       #
@@ -139,7 +139,11 @@ module Rocketeer
         html = []
         attributes.each do |k, v|
           next if v == nil
-          html.push "#{k}=\"#{v}\""
+          if v == true
+            html.push k
+          else
+            html.push "#{k}=\"#{v}\""
+          end
         end
         if attributes.count > 0
           " #{html.join(' ')}"
