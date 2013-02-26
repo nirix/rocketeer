@@ -61,6 +61,12 @@ get '/form/textarea' do
 end
 
 #########################################
+# Submit button
+get '/form/submit_button' do
+  submit_button 'Save', class: 'btn btn-primary'
+end
+
+#########################################
 # Tests
 
 describe 'Form Helpers' do
@@ -120,5 +126,11 @@ describe 'Form Helpers' do
   it "textarea [:issue, :info], value: 'Something', class: 'error'" do
     get '/form/textarea'
     last_response.body.should.equal '<textarea id="issue_info" name="issue[info]" class="error">Something</textarea>'
+  end
+
+  # Submit button
+  it "submit_button 'Save', class: 'btn btn-primary'" do
+    get '/form/submit_button'
+    last_response.body.should.equal '<button type="submit" class="btn btn-primary">Save</button>'
   end
 end
