@@ -38,6 +38,12 @@ get '/html/link_to_if/2' do
 end
 
 #########################################
+# css_link_tag
+get '/html/css_link_tag' do
+  css_link_tag '/assets/css/print.css', :print
+end
+
+#########################################
 # Tests
 
 describe 'HTML Helpers' do
@@ -73,5 +79,11 @@ describe 'HTML Helpers' do
   it "link_to_if - no link" do
     get '/html/link_to_if/2'
     last_response.body.should.equal 'False'
+  end
+
+  # css_link_tag
+  it "css_link_tag" do
+    get '/html/css_link_tag'
+    last_response.body.should.equal "<link rel=\"stylesheet\" href=\"/assets/css/print.css?#{Time.now.to_i}\" media=\"print\" />"
   end
 end
