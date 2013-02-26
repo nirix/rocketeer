@@ -26,6 +26,15 @@ end
 get '/html/link_to_unless_current/2' do
   link_to_unless_current 'link_to_unless_current', '/html/link_to_unless_current/2', class: 'test'
 end
+
+#########################################
+# link_to_if
+get '/html/link_to_if' do
+  link_to_if true, 'True', '/html/link_to_if', class: 'test'
+end
+
+get '/html/link_to_if/2' do
+  link_to_if false, 'False', '/html/link_to_if', class: 'test'
 end
 
 #########################################
@@ -55,5 +64,14 @@ describe 'HTML Helpers' do
     last_response.body.should.equal('link_to_unless_current')
   end
 
+  # link_to_if
+  it "link_to_if - link" do
+    get '/html/link_to_if'
+    last_response.body.should.equal '<a class="test" href="/html/link_to_if">True</a>'
+  end
+
+  it "link_to_if - no link" do
+    get '/html/link_to_if/2'
+    last_response.body.should.equal 'False'
   end
 end
