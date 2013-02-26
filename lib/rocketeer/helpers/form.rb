@@ -124,8 +124,7 @@ module Rocketeer
       # @since 0.1
       #
       def select_box(name, rows, selected = nil)
-        name = _name(name)
-        html = ["<select name=\"#{name.to_s}\" id=\"#{_id(name).to_s}\">"]
+        html = ["<select name=\"#{_name(name).to_s}\" id=\"#{_id(name).to_s}\">"]
 
         rows.each do |row|
           if row[1] == selected
