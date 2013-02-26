@@ -44,6 +44,12 @@ get '/html/css_link_tag' do
 end
 
 #########################################
+# js_inc_tag
+get '/html/js_inc_tag' do
+  js_inc_tag '/assets/js/jquery.js'
+end
+
+#########################################
 # Tests
 
 describe 'HTML Helpers' do
@@ -85,5 +91,11 @@ describe 'HTML Helpers' do
   it "css_link_tag" do
     get '/html/css_link_tag'
     last_response.body.should.equal "<link rel=\"stylesheet\" href=\"/assets/css/print.css?#{Time.now.to_i}\" media=\"print\" />"
+  end
+
+  # js_inc_tag
+  it "js_inc_tag" do
+    get '/html/js_inc_tag'
+    last_response.body.should.equal '<script src="/assets/js/jquery.js" type="text/javascript"></script>'
   end
 end
