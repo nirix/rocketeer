@@ -43,6 +43,12 @@ get '/form/select_box' do
 end
 
 #########################################
+# Check box
+get '/form/checkbox' do
+  checkbox [:user, :is_admin], value: 1, checked: true
+end
+
+#########################################
 # Tests
 
 describe 'Form Helpers' do
@@ -84,5 +90,11 @@ describe 'Form Helpers' do
                                       '  <option value="2" selected>Registered</option>' + "\n" \
                                       '</select>' + "\n"
     end
+  end
+
+  # Checkbox
+  it "checkbox [:user, :is_admin], value: 1, checked: true" do
+    get '/form/checkbox'
+    last_response.body.should.equal '<input name="user[is_admin]" value="1" checked type="checkbox" id="user_is_admin">'
   end
 end
