@@ -21,22 +21,6 @@ module Rocketeer
   module Helpers
     module Text
       ##
-      # Pluralizes the string.
-      #
-      # @example:
-      #    pluralize comments.count, 'comment'
-      #
-      # @param [Integer] count The count
-      # @param [String] singular The singular form of the string
-      # @param [String] plural The plural form of the word
-      # @author Jack Polgar
-      # @since 0.1
-      #
-      def pluralize(count, singular, plural = nil)
-        "#{count || 0} " + ((count == 1 || count =~ /^1(\.0+)?$/) ? singular : (plural || singular.pluralize))
-      end
-      
-      ##
       # Shortens the string to the specified length
       #
       # @example:
