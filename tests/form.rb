@@ -1,4 +1,5 @@
 require "bacon"
+require "bacon/colored_output"
 require "sinatra"
 require "rack/test"
 
