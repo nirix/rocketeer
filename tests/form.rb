@@ -37,6 +37,12 @@ get '/form/email_field' do
 end
 
 #########################################
+# Select box
+get '/form/select_box' do
+  select_box [:user, :group], [['Admin', 1], ['Registered', 2]], 2
+end
+
+#########################################
 # Tests
 
 describe 'Form Helpers' do
@@ -68,5 +74,15 @@ describe 'Form Helpers' do
   it "email_field [:user, :email], class: 'error', value: 'user@example.com'" do
     get '/form/email_field'
     last_response.body.should.equal '<input name="user[email]" class="error" value="user@example.com" type="email" id="user_email">'
+  end
+
+  # Select box
+  it "select_box [:user, :group], [['Admin', 1], ['Registered', 2]], 2" do
+    get '/form/select_box' do
+      last_response.body.should.equal '<select name="user[group]" id="user[group]">' + "\n" \
+                                      '  <option value="1">Admin</option>' + "\n" \
+                                      '  <option value="2" selected>Registered</option>' + "\n" \
+                                      '</select>' + "\n"
+    end
   end
 end
