@@ -89,7 +89,7 @@ module Rocketeer
       #
       def link_to_if(condition, text, url, options = {})
         if condition
-          link_to text, url, options = {}
+          link_to text, url, options
         else
           text
         end
